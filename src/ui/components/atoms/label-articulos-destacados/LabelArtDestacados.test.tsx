@@ -1,23 +1,21 @@
 import { render, screen } from '@testing-library/react';
-import LabelArtDestacados from './LabelArtDestacados';
+import {LabelArtDestacados} from './LabelArtDestacados.tsx';
 
-describe('LabelArtDestacados component', () => {
-  it('Should be rendered with the default text', () => {
-    render(<LabelArtDestacados />);
+describe('Articulos Destacados Component', () => {
+  test('Should display the correct text', () => {
+    render(<LabelArtDestacados text="ARTICULOS DESTACADOS" />);
     expect(screen.getByText('ARTICULOS DESTACADOS')).toBeInTheDocument();
   });
 
-  it('Should render with custom text.', () => {
-    render(<LabelArtDestacados text="Custom text Referencias" />);
-    expect(screen.getByText('Custom text Referencias')).toBeInTheDocument();
+  test('Should render the provided text', () => {
+    render(<LabelArtDestacados text="OTHER TEXT" />);
+    expect(screen.getByText('OTHER TEXT')).toBeInTheDocument();
   });
 
-  it('Should adjust text size responsively.', () => {
-    render(<LabelArtDestacados />);
-    const labelElement = screen.getByText('ARTICULOS DESTACADOS');
-    const initialFontSize = window.getComputedStyle(labelElement).getPropertyValue('font-size');
-    labelElement.style.fontSize = '20px';
-    const updatedFontSize = window.getComputedStyle(labelElement).getPropertyValue('font-size');
-    expect(updatedFontSize).not.toEqual(initialFontSize);
+  test('Should apply the correct CSS class', () => {
+    const { container } = render(<LabelArtDestacados text="ARTICULOS DESTACADOS" />);
+    const labelElement = container.querySelector('.label-articulos-destacados');
+    expect(labelElement).toBeInTheDocument();
+    expect(labelElement).toHaveTextContent('ARTICULOS DESTACADOS');
   });
 });

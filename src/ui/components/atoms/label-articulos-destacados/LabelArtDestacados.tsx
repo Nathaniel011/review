@@ -1,24 +1,14 @@
-import './styles.scss';
 import type { IProps } from './types/IProps';
+import './styles.scss';
 
-function LabelArtDestacados({ text = 'ARTICULOS DESTACADOS', colorVariant = 'primary' }: IProps) {
-  const getLabelColorClass = () => {
-    return colorVariant === 'main'
-      ? 'label-articulos-destacados--main'
-      : 'label-articulos-destacados--primary';
-  };
+export const LabelArtDestacados = (props: IProps) => {
 
-  const getBackgroundColorClass = () => {
-    return colorVariant === 'main' ? 'label-articulos-destacados--main-bg' : '';
-  };
+  const { text, color = 'primary' } = props;
+  const colorText = `label-articulos-destacados--${color}`;
 
   return (
-    <div
-      className={`label-articulos-destacados ${getLabelColorClass()} ${getBackgroundColorClass()}`}
-    >
-      <span className="label-articulos-destacados__text">{text}</span>
+    <div className={`label-articulos-destacdos ${colorText}`}>
+      <span>{text}</span>
     </div>
   );
 }
-
-export default LabelArtDestacados;
